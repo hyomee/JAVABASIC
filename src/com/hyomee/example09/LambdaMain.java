@@ -10,6 +10,17 @@ import java.util.function.Consumer;
 public class LambdaMain {
     public static void main(String[] args) {
 
+        // 익명 클래스
+        PrintNm printNmA  = new PrintNm() {
+            @Override
+            public void printName(String name) {
+                System.out.println(String.format("이름 : %s", name));
+            }
+        };
+
+        printNmA.printName("홍길동....");
+
+        // 람다식
         PrintNm printNm = (name) -> {
             System.out.println(String.format("이름 : %s", name));
         };
@@ -32,6 +43,12 @@ public class LambdaMain {
         citys.forEach(s -> System.out.println(s));
         System.out.println("### Consumer I/F 구현객체를 람다로 구현 축약 ====================");
         citys.forEach(System.out::println);
+
+        System.out.println("### FunctionInterface ====================");
+        FunctionInterfaceTest functionInterfaceTest = new FunctionInterfaceTest();
+        functionInterfaceTest.runWorker();
+
+        CalculationClass calculationClass = new CalculationClass(5, 3);
     }
 }
 
@@ -44,3 +61,53 @@ interface PrintNm {
         System.out.println(String.format("이름 : %s", name));
     }
 }
+
+@FunctionalInterface
+interface Worker {
+    public void work();
+}
+
+class FunctionInterfaceTest {
+
+    void execute(Worker worker) {
+        worker.work();
+    }
+
+    public void runWorker() {
+        execute(new Worker() {
+            @Override
+            public void work() {
+                System.out.println("Worker 실행");
+            }
+        });
+
+        execute( () -> System.out.println("Worker 람다식 실행"));
+    }
+}
+
+// 상송에 의한 인처페이스
+@FunctionalInterface
+interface Calculation {
+    Integer apply(Integer x, Integer y);
+}
+
+class CalculationClass {
+
+
+    // 인터페이스와 두개의 인자를 받아서 계산하는 Method
+    static Integer calculate(Calculation calculation, Integer x, Integer y) {
+        return  calculation.apply(x, y);
+    }
+
+    // 람다 함수 셍성
+    private Calculation addition = (x, y) -> x+y;
+    private Calculation subtraction = (x, y) -> x-y ;
+
+    public CalculationClass(Integer x, Integer y) {
+        // 함수 사용
+        System.out.println(String.format("%s + %s = %s", x, y, calculate(addition, 2,2)));
+        System.out.println(String.format("%s + %s = %s", x, y, calculate(subtraction, 2,2) ));
+    }
+
+}
+
