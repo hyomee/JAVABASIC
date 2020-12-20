@@ -57,8 +57,8 @@ public class GenericMain {
         genericMethodTest();
 
         // 제한
-        GenericTypeBounded<Integer> box = new GenericTypeBounded<>();
-        GenericTypeBounded.set("Hi"); // compile error
+        //GenericTypeBounded<Integer> box = new GenericTypeBounded<>();
+        //GenericTypeBounded.set("Hi"); // compile error
 
     }
 
