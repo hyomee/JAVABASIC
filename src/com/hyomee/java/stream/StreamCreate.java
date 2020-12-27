@@ -6,10 +6,16 @@ import java.util.stream.Stream;
 public class StreamCreate {
   public static void main(String[] arg) {
 
+    System.out.println("===================================================");
+    System.out.println("*. Stream.of를 이용한 Stream 생성  ");
+    Stream<String> streamof = Stream.of("java", "c#", "c++");
+    streamof.forEach(o->System.out.println(o.getClass() + "::"  + o));
+
     System.out.println("1. null를 대신 하여 empty 객체 생성 ");
     Stream<String> stream = Stream.empty();
     System.out.println("stream :: " + stream.count());
     System.out.println("Stream.<String>empty()와 같음");
+
     System.out.println("===================================================");
     System.out.println("2. builer를 이용한 객체 생성 ( Object ) ");
     Stream<Object> objectStream = Stream.builder()
@@ -28,10 +34,7 @@ public class StreamCreate {
             .build();
     stringStream.forEach(o->System.out.println(o.getClass() + "::"  + o));
 
-    System.out.println("===================================================");
-    System.out.println("3. Stream.of를 이용한 Stream 생성  ");
-    Stream<String> streamof = Stream.of("java", "c#", "c++");
-    streamof.forEach(o->System.out.println(o.getClass() + "::"  + o));
+
 
     System.out.println("===================================================");
     System.out.println("4. generate을 이용한 무한 스크림 생성 :: 주의 사이즈를 정해야함  ");

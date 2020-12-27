@@ -1,6 +1,7 @@
 package com.hyomee.java.stream;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +20,7 @@ public class Filter {
     //          predicate<T>, 즉 T를 인자로 받고 boolean을 리턴하는 험수형 인터페이스로 평가식을 작성
     Stream<String> addressStream = address.stream();
     List<String> songpa = addressStream.filter(s -> s.contains("송파구")).collect(Collectors.toList());
-    songpa.stream().forEach(s-> System.out.println(s));
+    songpa.stream().forEach(System.out::println);
 
     System.out.println("=======================================");
     // Map : Stream 요소에 있는 값들을 특정 방식으로 변환 하고 싶을 떄 사용
@@ -27,5 +28,17 @@ public class Filter {
     List<String> tmp = address.stream().map(s->s.replaceAll("송파구", "송파")).collect(Collectors.toList());
     tmp.stream().forEach(s-> System.out.println(s));
     System.out.println("=======================================");
+
+
+
+    String[][] arrays = new String[][]{ {"a1", "a2"}, {"b1", "b2"}, {"c1", "c2", "c3"} };
+    Stream<String[]> stream4 = Arrays.stream(arrays);
+    Stream<String> stream5 = stream4.flatMap(s -> Arrays.stream(s));
+    stream5.map(String::toUpperCase).forEach(System.out::println);
+
+
+
   }
 }
+
+
