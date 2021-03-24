@@ -105,8 +105,6 @@ class EnumSpeedControl {
             this.MAXSPEED = max;
         }
 
-
-
         public static int getMaxSpeed(int speedUnit) {
             SPEED_CONTROL[] speed_controls = SPEED_CONTROL.values();
             SPEED_CONTROL speedcontrol =  Arrays.stream(speed_controls)
