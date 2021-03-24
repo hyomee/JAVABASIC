@@ -1,4 +1,4 @@
-package com.hyomee.cleancode.condition;
+package com.hyomee.cleancode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
