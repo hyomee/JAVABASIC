@@ -1,8 +1,6 @@
 package com.hyomee.cleancode;
 
 import java.util.Arrays;
-import java.util.Optional;
-import java.util.stream.IntStream;
 
 public class MagicNumber {
     public static void main(String[] agrs) {
