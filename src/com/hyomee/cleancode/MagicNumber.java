@@ -6,22 +6,27 @@ import java.util.stream.IntStream;
 
 public class MagicNumber {
     public static void main(String[] agrs) {
-        MagicSpeedControl magicSpeedControl = new MagicSpeedControl();
 
+        // 1. 매직 넘버를 통한 접근
+        MagicSpeedControl magicSpeedControl = new MagicSpeedControl();
         magicSpeedControl.setAction(0);
         System.out.println(String.format("magicSpeedControl :: 최고 속도는 %s Km 입니다." , magicSpeedControl.getMaximumSpeed()));
 
+        // 2. 상수를 통한 접근
         StaticSpeedControl staticSpeedControl = new StaticSpeedControl();
         staticSpeedControl.setAction(3);
         System.out.println(String.format("staticSpeedControl :: 최고 속도는 %s Km 입니다." , staticSpeedControl.getMaximumSpeed()));
 
+        // 3. Enum을 통합 접근
         EnumSpeedControl enumSpeedControl = new EnumSpeedControl();
         enumSpeedControl.setAction(3);
         System.out.println(String.format("enumSpeedControl :: 최고 속도는 %s Km 입니다." , enumSpeedControl.getMaximumSpeed()));
 
+        // 4. Enum 상수를 통한 접근
         int maxSpeed = EnumSpeedControl.SPEED_CONTROL.getMaxSpeed(2);
         System.out.println(String.format("EnumSpeedControl.SPEED_CONTROL :: 최고 속도는 %s Km 입니다." , maxSpeed));
 
+        // 5. Enum 함수를 통한 접근
         maxSpeed = EnumSpeedControl.SPEED_CONTROL.getMaxSpeed(4);
         System.out.println(String.format("EnumSpeedControl.SPEED_CONTROL :: 최고 속도는 %s Km 입니다." , maxSpeed));
 
