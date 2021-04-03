@@ -73,9 +73,9 @@ public class UseFinal {
 
     private static void nullNoReturn() {
         System.out.println("===    private static void nullNoReturn()  ===============");
-        City city = nullReturn.getCity("서울");
+        City city = ExplicitNullReturn.getCity("서울");
         System.out.println( " city.getCity() :: " +  city.getCity() );
-        city = nullReturn.getCity("부산");
+        city = ExplicitNullReturn.getCity("부산");
 
         if (city == null) {
             System.out.println(" 부산 ::  null ... ");
@@ -83,9 +83,9 @@ public class UseFinal {
             System.out.println(" city.getCity() : " + city.getCity());
         }
 
-        city = nullNoReturn.getCity("서울");
+        city = ObjectNullNeturn.getCity("서울");
         System.out.println( " city.getCity() :: " +  city.getCity() );
-        city = nullNoReturn.getCity("부산");
+        city = ObjectNullNeturn.getCity("부산");
         System.out.println( " 부산 :: city.getCity() :: " +  city.getCity() );
     }
 }
@@ -162,7 +162,7 @@ class City {
     }
 }
 
-class nullReturn {
+class ExplicitNullReturn {
     static List<City> cities = Arrays.asList(
             new City("서울"),
             new City("대전")
@@ -179,7 +179,7 @@ class nullReturn {
     }
 }
 
-class nullNoReturn {
+class ObjectNullNeturn {
 
     private static final City city = new City("");
 
