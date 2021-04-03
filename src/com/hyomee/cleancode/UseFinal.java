@@ -2,36 +2,59 @@ package com.hyomee.cleancode;
 
 import java.util.*;
 
-public class ClassDesign {
+/**
+ * 기본적으로 객체는 불볍 상태이다.
+ * 가별 상태는 코드의 작성에 따라서 잘못된 결과를 초래 할 수 있다.
+ */
+public class UseFinal {
     public static void main(String[] agrs) {
 
-        finalMember();
+        MutableClass seoulToDaejeon = new MutableClass ("서울 to 대전 : ", 200);
+        seoulToBusan(seoulToDaejeon);
+
+        ImmutableClass seoulToDaejeonImmutable = new ImmutableClass ("서울 to 대전 : ", 200);
+        finalSeoulToBusan(seoulToDaejeonImmutable);
+
+
         protectClass();
         nullNoReturn();
 
     }
-    private static void finalMember() {
-        // final 용도
-        MutableClass seoulToDaejeon = new MutableClass ("서울 to 대전 : ", 200);
+
+    private static void seoulToBusan(MutableClass seoulToDaejeon) {
+
         MutableClass daejeonToBusan = new MutableClass ("대전 to 부산 : ", 400);
 
         MutableClass seoulToDaejeonToBusan = seoulToDaejeon;
+        // 서울 to 대전 to 부산 거리 계산
         seoulToDaejeonToBusan.add(daejeonToBusan);
-        System.out.println("가변 :: 서울 to 대전 to 부산 :: " + seoulToDaejeonToBusan.value);
+        System.out.println("가변 :: 서울 to 대전 to 부산 :: seoulToDaejeonToBusan :: "
+                + seoulToDaejeonToBusan.value);
 
-        // 서울 to 대전 거리 변경
+        // 서울 to 대전 거리 변경를 변경 하면
         seoulToDaejeon.value = 300;
-        System.out.println("가변 :: 서울 to 대전 :: " + seoulToDaejeon.value);
-        System.out.println("가변 :: 서울 to 대전 to 부산 :: " + seoulToDaejeonToBusan.value);
+        // 서울 to 대전 to 부산 거리를 재 계산 하면
+        seoulToDaejeonToBusan.add(daejeonToBusan);
+        // 거리가 변경이 된다.
+        System.out.println("가변 :: 서울 to 대전 to 부산 :: seoulToDaejeonToBusan :: "
+                + seoulToDaejeonToBusan.value);
 
-        ImmutableClass seoulToDaejeonImmutable = new ImmutableClass ("서울 to 대전 : ", 200);
-        ImmutableClass daejeonToBusanImmutable = new ImmutableClass ("대전 to 부산 : ", 400);
-        ImmutableClass seoulToDaejeonToBusanImmutable = seoulToDaejeonImmutable.add(daejeonToBusanImmutable);
-        System.out.println("서울 to 대전 to 부산  :: " + seoulToDaejeonToBusanImmutable.value);
-        // seoulToDaejeonImmutable.value = 300 -> 불변 객체 이므로 수정 할 수 없음 ;
+    }
+
+    private static void finalSeoulToBusan(ImmutableClass seoulToDaejeonImmutable) {
+
+        ImmutableClass daejeonToBusanImmutable =
+                new ImmutableClass ("대전 to 부산 : ", 400);
+        ImmutableClass seoulToDaejeonToBusanImmutable =
+                seoulToDaejeonImmutable.add(daejeonToBusanImmutable);
+        System.out.println("불변 :: 서울 to 대전 to 부산  :: "
+                + seoulToDaejeonToBusanImmutable.value);
+
+        // seoulToDaejeonImmutable.value = 300; // -> 불변 객체 이므로 수정 할 수 없음 ;
     }
 
     private static void protectClass() {
+        System.out.println("===    private static void protectClass()  ===============");
         List<City> cityList = new ArrayList<>();
         Cities cities = new Cities(cityList);
         System.out.println( " cities.getCities().size() :: " +  cities.getCities().size() );
@@ -49,6 +72,7 @@ public class ClassDesign {
     }
 
     private static void nullNoReturn() {
+        System.out.println("===    private static void nullNoReturn()  ===============");
         City city = nullReturn.getCity("서울");
         System.out.println( " city.getCity() :: " +  city.getCity() );
         city = nullReturn.getCity("부산");
