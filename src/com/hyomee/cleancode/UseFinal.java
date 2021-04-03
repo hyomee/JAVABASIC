@@ -73,10 +73,11 @@ public class UseFinal {
 
     private static void nullNoReturn() {
         System.out.println("===    private static void nullNoReturn()  ===============");
+
+        // 명시적 null 처리
         City city = ExplicitNullReturn.getCity("서울");
         System.out.println( " city.getCity() :: " +  city.getCity() );
         city = ExplicitNullReturn.getCity("부산");
-
         if (city == null) {
             System.out.println(" 부산 ::  null ... ");
         } else {
@@ -167,14 +168,12 @@ class ExplicitNullReturn {
             new City("서울"),
             new City("대전")
     );
-
     static City getCity(String cityName) {
         for (City city: cities) {
             if (city.getCity().equals(cityName)) {
                 return city;
             }
         }
-
         return null;
     }
 }
