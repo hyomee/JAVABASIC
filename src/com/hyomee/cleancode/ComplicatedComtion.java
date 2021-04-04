@@ -90,7 +90,7 @@ class ComplicatedStreamBooks {
     // 복잡한 조건 Method 참조
     public long countCategoryByMethod(String category) {
         return complicatedBooks.stream().filter( complicatedBook -> isContains(complicatedBook, category))
-                .map(complicatedBook -> complicatedBook.getBookId())
+                .map(ComplicatedBook :: getBookId)
                 .distinct()
                 .count();
     }
